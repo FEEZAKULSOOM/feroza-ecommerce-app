@@ -111,8 +111,8 @@ export const placeOrderSafePay = async (req, res) => {
     const checkoutURL = safepay.checkout.create({
       token,
       orderId: newOrder._id.toString(),
-      cancelUrl:  process.env.FRONTEND_URL + "/placeorder",
-      redirectUrl: process.env.FRONTEND_URL + "/order-confirmation",
+      cancelUrl:  "http://localhost:5173/placeorder",
+      redirectUrl: "http://localhost:5173/order-confirmation",
       source: "custom",
       webhooks: true
     });
