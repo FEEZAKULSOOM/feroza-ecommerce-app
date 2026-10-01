@@ -5,7 +5,7 @@ export const authDataContext = createContext()
 
 function AuthContext({children}) {
 
-    let serverUrl = "https://feroza-ecommerce-app-backend.onrender.com/"
+    let serverUrl = "https://feroza-ecommerce-app-backend.onrender.com"
 
     return (
       
