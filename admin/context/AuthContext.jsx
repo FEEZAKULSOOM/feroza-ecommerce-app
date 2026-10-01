@@ -3,7 +3,7 @@ import { createContext } from 'react'
 
 export const authDataContext = createContext()
 
-let serverUrl= "https://feroza-ecommerce-app-backend.onrender.com/"
+let serverUrl= "https://feroza-ecommerce-app-backend.onrender.com"
 let value ={
       serverUrl
 
