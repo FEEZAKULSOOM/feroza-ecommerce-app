@@ -58,7 +58,7 @@ const handleGoogleLogin = async () => {
       );
 
       console.log("Google Login successful:", result.data);
-    
+      toast.success("Google Login Successful");
       getCurrentUser()
       navigate('/');
     } catch (error) {
@@ -66,7 +66,7 @@ const handleGoogleLogin = async () => {
         console.warn("User closed the Google auth popup before finishing.");
       } else {
         console.error("Google auth error:", error);
-       
+         toast.error("Google Login Failed");
       }
     }
   };
