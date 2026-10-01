@@ -111,8 +111,8 @@ export const placeOrderSafePay = async (req, res) => {
     const checkoutURL = safepay.checkout.create({
       token,
       orderId: newOrder._id.toString(),
-      cancelUrl:  "http://localhost:5173/placeorder",
-      redirectUrl: "http://localhost:5173/order-confirmation",
+      cancelUrl:  "https://feroza-ecommerce-app-admin.onrender.com/placeorder",
+      redirectUrl: "https://feroza-ecommerce-app-frontend.onrender.com/order-confirmation",
       source: "custom",
       webhooks: true
     });

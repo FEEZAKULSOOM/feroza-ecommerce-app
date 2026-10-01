@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
   origin: ["https://feroza-ecommerce-app-frontend.onrender.com",
-    "http://localhost:5174"
+    "https://feroza-ecommerce-app-admin.onrender.com"
 
   ], // Replace with your frontend URL
   credentials: true
