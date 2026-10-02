@@ -28,7 +28,7 @@ function Registration() {
     try {
        setLoading(true);
       const result = await axios.post(
-        `${serverUrl}/api/auth/register`,
+        `${serverUrl}/api/auth/registration`,
         { name, email, password },
         { withCredentials: true }
       );
