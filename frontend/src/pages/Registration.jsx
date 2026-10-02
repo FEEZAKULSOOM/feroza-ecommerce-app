@@ -20,33 +20,38 @@ function Registration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  let {getCurrentUser}=useContext(userDataContext)
+  const [googleLoading, setGoogleLoading] = useState(false);
+  let { getCurrentUser } = useContext(userDataContext);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
    
     try {
-       setLoading(true);
+      setLoading(true);
       const result = await axios.post(
         `${serverUrl}/api/auth/registration`,
         { name, email, password },
         { withCredentials: true }
       );
+      
       console.log("Registration successful:", result.data);
-      setLoading(false);
       toast.success("Registration Successful");
-      getCurrentUser()
+      if (getCurrentUser) await getCurrentUser();
       navigate('/');
-      // navigate('/login');
     } catch (error) {
       console.error("Error during registration:", error);
+      toast.error(error?.response?.data?.message || "Registration Failed");
+    } finally {
       setLoading(false);
-      toast.error("Registration Failed");
     }
   };
 
   const handleGoogleSignUp = async () => {
+    // Prevent simultaneous popup attempts
+    if (googleLoading) return;
+
     try {
+      setGoogleLoading(true);
       const response = await signInWithPopup(auth, provider);
       const user = response.user;
 
@@ -58,13 +63,24 @@ function Registration() {
         },
         { withCredentials: true }
       );
-      console.log("Google Signed Up successful:", result.data);
+
+      console.log("Google Login successful:", result.data);
+      toast.success("Registration Successful");
+      if (getCurrentUser) await getCurrentUser();
+      navigate('/');
+
     } catch (error) {
-      if (error.code === 'auth/popup-closed-by-user') {
-        console.warn("User closed the Google auth popup before finishing.");
+      if (
+        error.code === 'auth/popup-closed-by-user' ||
+        error.code === 'auth/cancelled-popup-request'
+      ) {
+        console.warn("Google auth popup was closed or replaced.");
       } else {
         console.error("Google auth error:", error);
+        toast.error(error?.response?.data?.message || "Google registration failed");
       }
+    } finally {
+      setGoogleLoading(false);
     }
   };
 
@@ -93,11 +109,14 @@ function Registration() {
           {/* Google Button */}
           <button
             type="button"
+            disabled={googleLoading || loading}
             onClick={handleGoogleSignUp}
-            className="w-full h-[50px] bg-[#42656cae] hover:bg-[#42656c] transition rounded-lg flex items-center justify-center gap-3 cursor-pointer text-white font-medium"
+            className={`w-full h-[50px] bg-[#42656cae] hover:bg-[#42656c] transition rounded-lg flex items-center justify-center gap-3 cursor-pointer text-white font-medium ${
+              googleLoading ? 'opacity-60 cursor-not-allowed' : ''
+            }`}
           >
             <img src={googleLogo} className="w-[20px] h-[20px] rounded-full" alt="Google" />
-            Register with Google
+            {googleLoading ? "Connecting..." : "Register with Google"}
           </button>
 
           {/* OR Divider */}
@@ -156,7 +175,8 @@ function Registration() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full h-[50px] bg-[#6060f5] hover:bg-[#4a4ae6] transition rounded-lg flex items-center justify-center mt-2 text-[17px] font-semibold cursor-pointer"
+              disabled={loading || googleLoading}
+              className="w-full h-[50px] bg-[#6060f5] hover:bg-[#4a4ae6] transition rounded-lg flex items-center justify-center mt-2 text-[17px] font-semibold cursor-pointer disabled:opacity-60"
             >
               { loading ? <Loading/> : "Create Account" }
             </button>
