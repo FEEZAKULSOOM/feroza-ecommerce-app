@@ -162,7 +162,7 @@ function Registration() {
             </button>
 
             {/* Navigation Link */}
-            <p className="flex gap-2 text-sm mt-2">
+            <p className="flex gap-2 text-sm sm:text-[12px] mt-2">
               Already have an account?
               <span
                 className="text-[#5555f6cf] cursor-pointer font-semibold hover:underline"
