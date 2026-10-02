@@ -12,7 +12,7 @@ function LatestCollection() {
 
    useEffect(() => {
    let latestProducts = Array.isArray(products)
-    ? products.filter((item, index) => index < 8)
+    ? products.filter((item, index) => index < 9)
     : [];
     setLatestProducts(latestProducts);
 }, [products]);
