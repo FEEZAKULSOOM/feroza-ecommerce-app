@@ -155,7 +155,7 @@ const handleGoogleLogin = async () => {
             </button>
 
             {/* Register Route Redirect */}
-            <p className="flex gap-2 text-sm mt-2">
+            <p className="flex gap-2 text-sm sm:text-[12px] mt-2">
               Don't have an account?
               <span
                 className="text-[#5555f6cf] cursor-pointer font-semibold hover:underline"

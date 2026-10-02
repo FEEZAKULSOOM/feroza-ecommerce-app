@@ -39,14 +39,14 @@ function App() {
                     }
                 />
 
-                <Route
-                    path="/registration"
-                    element={
-                        userData
-                            ? <Home />
-                            : <Navigate to="/login" />
-                    }
-                />
+<Route
+    path="/registration"
+    element={
+        userData
+            ? <Navigate to="/" replace />
+            : <Registration />
+    }
+/>
 
                 <Route
                     path="/order-confirmation"
