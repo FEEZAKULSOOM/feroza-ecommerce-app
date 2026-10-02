@@ -84,8 +84,14 @@ export const verifySafePay = async (req, res) => {
 
 export const placeOrderSafePay = async (req, res) => {
   try {
-    const { items, total, address } = req.body.orderData;
+    const { items, total, address } = req.body.orderData || req.body;
     const userId = req.userId;
+
+    if (!items || !total || !address) {
+      return res.status(400).json({
+        message: "Incomplete order data: items, total, and address are required"
+      });
+    }
 
     // 1. Save the order to MongoDB
     const orderData = {
@@ -101,39 +107,40 @@ export const placeOrderSafePay = async (req, res) => {
     const newOrder = new Order(orderData);
     await newOrder.save();
 
-    // 2. Request a payment tracker token from Safepay
+    // 2. Request a payment tracker token from Safepay (Sanitized PKR minor units)
+    const amountInCents = Math.round(Number(total) * 100);
     const { token } = await safepay.payments.create({
-      amount: total * 100,
-      currency: currency
+      amount: amountInCents,
+      currency: "PKR" // ✅ Fixed: Defined currency as "PKR" directly
     });
 
-    // 3. Generate Safepay Hosted Checkout URL
+    // 3. Generate Safepay Hosted Checkout URL with correct user-facing endpoints
     const checkoutURL = safepay.checkout.create({
       token,
       orderId: newOrder._id.toString(),
-      cancelUrl:  "https://feroza-ecommerce-app-admin.onrender.com/placeorder",
+      cancelUrl: "https://feroza-ecommerce-app-frontend.onrender.com/placeorder", // ✅ Points to frontend placeorder
       redirectUrl: "https://feroza-ecommerce-app-frontend.onrender.com/order-confirmation",
       source: "custom",
       webhooks: true
     });
 
-    // 4. Return successful response back to frontend
+    // 4. Return response
     return res.status(200).json({
+      success: true,
       message: "Order created successfully",
       orderId: newOrder._id,
       checkoutURL
     });
 
   } catch (error) {
-    console.log("Order placement error:", error);
-
+    console.error("Order placement error:", error);
     return res.status(500).json({
+      success: false,
       message: "Order placement error",
       error: error.message
     });
   }
 };
-
 
 
 
