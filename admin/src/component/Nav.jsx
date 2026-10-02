@@ -45,7 +45,8 @@ function Nav() {
 
         <button className="text-[15px] hover:border-[2px] border-[#89daea]
          cursor-pointer bg-[#000000ca] py-[10px] px-[20px] rounded-2xl text-white"
-           onClick ={logOut}>
+           onClick ={() => {logOut()
+             toast.success("Logged Out Successfully")} }>
           LogOut
         </button>
 
