@@ -40,7 +40,7 @@ function App() {
                 />
 
                 <Route
-                    path="/signup"
+                    path="/registration"
                     element={
                         userData
                             ? <Home />
