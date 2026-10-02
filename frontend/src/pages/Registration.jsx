@@ -58,7 +58,7 @@ function Registration() {
         },
         { withCredentials: true }
       );
-      console.log("Google Login successful:", result.data);
+      console.log("Google Signed Up successful:", result.data);
     } catch (error) {
       if (error.code === 'auth/popup-closed-by-user') {
         console.warn("User closed the Google auth popup before finishing.");

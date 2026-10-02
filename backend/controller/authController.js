@@ -2,42 +2,111 @@ import User from "../model/userModel.js";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import { generateToken , generateToken1 } from "../config/token.js";
-export const registration = async (req, res) => {
-   try {
-      const { name, email, password } = req.body;
-      if (!validator.isEmail(email)) {
-         return res.status(400).json({ message: "Invalid email format" });
-      }
-      if (!validator.isLength(password, { min: 6 })) {
-         return res.status(400).json({ message: "Password must be at least 6 characters long" });
-      }
-      const existingUser = await User.findOne({ email });
-      if (existingUser) {
-         return res.status(400).json({ message: "User already exists" });
-      }
-       let hashedPassword = await bcrypt.hash(password, 12);
+import validator from "validator";
+import bcrypt from "bcrypt";
+import User from "../models/userModel.js"; // Adjust your import path
+import { generateToken } from "../utils/generateToken.js"; // Adjust your import path
 
-       const user = await User.create({
-            name,
-            email,
-            password: hashedPassword
-       })
-       let token = await generateToken(user)
-       res.cookie("token", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
-        maxAge: 1000 * 60 * 60 * 24 *6
-   
-     
-   
-   })
-       return res.status(201).json({ message: "User registered successfully", user })
-   } catch (error) {
-    console.error("Error in registerUser:", error);
-       return res.status(500).json({ message: "Internal server error" , error: error.message })
-   }
-}
+// 1. Regular Form Registration (Email + Password)
+export const registration = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    if (!name || name.trim() === "") {
+      return res.status(400).json({ message: "Name is required" });
+    }
+
+    if (!email || !validator.isEmail(email)) {
+      return res.status(400).json({ message: "Invalid email format" });
+    }
+
+    if (!password || !validator.isLength(password, { min: 6 })) {
+      return res.status(400).json({ message: "Password must be at least 6 characters long" });
+    }
+
+    const existingUser = await User.findOne({ email: email.toLowerCase() });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists with this email" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    const user = await User.create({
+      name,
+      email: email.toLowerCase(),
+      password: hashedPassword,
+    });
+
+    const token = await generateToken(user);
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 1000 * 60 * 60 * 24 * 6,
+    });
+
+    return res.status(201).json({
+      message: "User registered successfully",
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    console.error("Error in registration:", error);
+    return res.status(500).json({ message: "Internal server error", error: error.message });
+  }
+};
+
+// 2. Google Registration / Login Controller
+export const googleAuth = async (req, res) => {
+  try {
+    const { name, email, image } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required from Google account" });
+    }
+
+    let user = await User.findOne({ email: email.toLowerCase() });
+
+    // If user does not exist, create them
+    if (!user) {
+      // Generate a random placeholder password for schema compatibility if password is required
+      const randomPassword = Math.random().toString(36).slice(-10) + Math.random().toString(36).slice(-10);
+      const hashedPassword = await bcrypt.hash(randomPassword, 12);
+
+      user = await User.create({
+        name: name || "User",
+        email: email.toLowerCase(),
+        password: hashedPassword,
+        image: image || "",
+      });
+    }
+
+    const token = await generateToken(user);
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 1000 * 60 * 60 * 24 * 6,
+    });
+
+    return res.status(200).json({
+      message: "Google login successful",
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    console.error("Error in googleAuth:", error);
+    return res.status(500).json({ message: "Google auth failed", error: error.message });
+  }
+};
 
 export const login = async (req, res) =>  {
     try {
