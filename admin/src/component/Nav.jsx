@@ -5,6 +5,7 @@ import  axios from 'axios'
 import { useContext } from 'react'
 import { authDataContext } from '../../context/AuthContext.jsx'
 import { adminDataContext } from '../../context/AdminContext.jsx'
+import { toast } from 'react-toastify'
 function Nav() {
 
      let navigate = useNavigate();
@@ -17,10 +18,11 @@ function Nav() {
              const result = await axios.post(serverUrl + "/api/auth/logout" , {withCredentials: true})
              console.log(result.data)
              navigate("/login")
+             toast.success("Logged Out Successfully")
 
          }catch (error)  {
              console.log(error)
-     
+             toast.error("Failed to log out")
              
          }
 
@@ -45,8 +47,7 @@ function Nav() {
 
         <button className="text-[15px] hover:border-[2px] border-[#89daea]
          cursor-pointer bg-[#000000ca] py-[10px] px-[20px] rounded-2xl text-white"
-           onClick ={() => {logOut()
-             toast.success("Logged Out Successfully")} }>
+           onClick = {logOut}>
           LogOut
         </button>
 
