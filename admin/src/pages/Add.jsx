@@ -226,44 +226,45 @@ bg-slate-600 px-[15px] md:px-[20px] py-[10px] text-[16px] md:text-[18px] placeho
                 ></textarea>
             </div>
 
-            <div className="w-full sm:w-[80%] flex items-center gap-[10px] flex-wrap">
-                <div
-                    className="w-full sm:w-[45%] md:w-[30%] flex items-start sm:justify-center
-flex-col gap-[8px] md:gap-[10px]"
-                >
-                    <p className="text-[18px] sm:text-[20px] md:text-[25px] font-semibold w-[100%]">
-                        Product Category
-                    </p>
+           <div className="w-[80%] flex items-start md:items-end gap-[15px] md:gap-[30px] flex-wrap md:flex-nowrap">
+    
+    {/* Product Category */}
+    <div className="w-[100%] md:w-auto flex items-start flex-col gap-[10px]">
+        <p className="text-[20px] md:text-[25px] font-semibold whitespace-nowrap">
+            Product Category
+        </p>
 
-                    <select
-                        name=""
-                        id=""
-                        className="bg-slate-600 w-full sm:w-[80%] md:w-[60%] px-[10px] py-[7px] rounded-lg hover:border-[#46d1f7] border-[2px]"
-                        onChange={(e) => setCategory(e.target.value)} >
-                        <option value="Men">Men</option>
-                        <option value="Women">Women</option>
-                        <option value="Kids">Kids</option>
-                    </select>
-                </div>
+        <select
+            name=""
+            id=""
+            className="bg-slate-600 w-[60%] md:w-[170px] px-[10px] py-[7px] rounded-lg hover:border-[#46d1f7] border-[2px]"
+            onChange={(e) => setCategory(e.target.value)}
+        >
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+            <option value="Kids">Kids</option>
+        </select>
+    </div>
 
-                <div
-                    className="w-full sm:w-[45%] md:w-[30%] flex items-start sm:justify-center flex-col gap-[8px] md:gap-[10px]"
-                >
-                    <p className="text-[18px] sm:text-[20px] md:text-[25px] font-semibold w-[100%]">
-                        Sub-Category
-                    </p>
+    {/* Sub-Category */}
+    <div className="w-[100%] md:w-auto flex items-start flex-col gap-[10px]">
+        <p className="text-[20px] md:text-[25px] font-semibold whitespace-nowrap">
+            Sub-Category
+        </p>
 
-                    <select
-                        name=""
-                        id=""
-                        className="bg-slate-600 w-full sm:w-[80%] md:w-[60%] px-[10px] py-[7px] rounded-lg hover:border-[#46d1f7] border-[2px]"
-                        onChange={(e) => setSubCategory(e.target.value)}>
-                        <option value="TopWear">TopWear</option>
-                        <option value="BottomWear">BottomWear</option>
-                        <option value="WinterWear">WinterWear</option>
-                    </select>
-                </div>
-            </div>
+        <select
+            name=""
+            id=""
+            className="bg-slate-600 w-[60%] md:w-[170px] px-[10px] py-[7px] rounded-lg hover:border-[#46d1f7] border-[2px]"
+            onChange={(e) => setSubCategory(e.target.value)}
+        >
+            <option value="TopWear">TopWear</option>
+            <option value="BottomWear">BottomWear</option>
+            <option value="WinterWear">WinterWear</option>
+        </select>
+    </div>
+
+</div>
 
             <div className="w-full sm:w-[80%] h-auto min-h-[80px] md:h-[100px] flex 
 items-start justify-center flex-col gap-[8px] md:gap-[10px]">
@@ -409,10 +410,12 @@ gap-[10px] mt-[10px] md:mt-[20px]">
             </div>
 
             <button
-                className="w-[130px] sm:w-[140px] px-[15px] sm:px-[20px] py-[14px] sm:py-[20px] 
+                className="w-[130px] sm:w-[140px] px-[15px] 
+                sm:px-[20px] py-[14px] sm:py-[20px] 
 rounded-xl bg-[#65d8f7] flex items-center justify-center
 gap-[10px] text-black active:bg-slate-700
-active:text-white active:border-[2px] border-white cursor-pointer font-medium"
+active:text-white active:border-[2px] border-white 
+cursor-pointer font-medium mb-[50px] md:mb-0"
             >
                 {loading ? <Loading/> : "Add Product"}
             </button>
