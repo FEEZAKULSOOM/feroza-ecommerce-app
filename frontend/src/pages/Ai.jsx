@@ -168,17 +168,25 @@ function Ai() {
   }
 
   return (
-    <div 
-      className="fixed lg:bottom-[20px] md:bottom-[40px] bottom-[80px] left-[2%] z-50" 
-      onClick={startListening}
-    >
-      <img 
-        alt="AI Assistant" 
-        className={`w-[100px] cursor-pointer ${activeAi ? 'translate-y-[-10%] translate-x-[10%] scale-125' : 'translate-y-0 translate-x-0 scale-100 '} transition-transform`} 
-        style={{ filter: `${activeAi ? 'drop-shadow(0 0 30px #00d2fc)' : 'drop-shadow(0 0 20px black)'}` }} 
-        src={ai} 
-      />
-    </div>
+<div 
+  className="fixed z-50 left-3 sm:left-6 bottom-[70px] sm:bottom-6 md:bottom-8 lg:bottom-6" 
+  onClick={startListening}
+>
+  <img 
+    alt="AI Assistant" 
+    className={`w-[48px] sm:w-[65px] md:w-[85px] lg:w-[95px] cursor-pointer transition-all duration-300 ${
+      activeAi 
+        ? 'translate-y-[-10%] translate-x-[10%] scale-110 sm:scale-125' 
+        : 'translate-y-0 translate-x-0 scale-100'
+    }`} 
+    style={{ 
+      filter: activeAi 
+        ? 'drop-shadow(0 0 25px #00d2fc)' 
+        : 'drop-shadow(0 0 12px rgba(0,0,0,0.7))' 
+    }} 
+    src={ai} 
+  />
+</div>
   )
 }
 

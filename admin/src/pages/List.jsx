@@ -1,5 +1,4 @@
-
-import react from 'react'
+import React from 'react'
 import Nav from '../component/Nav'
 import SideBar from '../component/SideBar'
 import { useState } from 'react'
@@ -32,8 +31,8 @@ export default function List() {
               console.log(error)
           }
 
-         
-         
+          
+          
      }
 
      const fetchList = async () =>  {
@@ -74,22 +73,24 @@ export default function List() {
 
             <div
                 className="w-[90%] md:h-[120px] 
-                h-[90px] bg-slate-600 rounded-xl flex items-center justify-start gap-[5px] md:gap-[30px] p-[10px] md:px-[30px]"
+                min-h-[90px] h-auto bg-slate-600 rounded-xl flex items-center justify-start gap-[10px] md:gap-[30px] p-[10px] md:px-[30px]"
                 key={index}
             >
                 <img
                     src={item.image1}
                     alt=""
-                    className="w-[30%] md:w-[120px] h-[90%] rounded-lg"
+                    className="w-[60px] h-[60px] md:w-[120px] md:h-[90%] shrink-0 object-cover rounded-lg"
                 />
 
-                <div className="w-[90%] h-[80%] flex flex-col items-start justify-center
+                <div className="w-[80%] flex-1 min-w-0 flex flex-col items-start justify-center
                 gap-[2px]">
-                     <div className="w-[100%] md:text-[20px] text-[15px] 
-                     text-[#bef0f3]">
+                     <div 
+                        title={item.name}
+                        className="w-[100%] md:text-[20px] text-[15px] text-[#bef0f3] truncate"
+                     >
                         {item.name}
                         </div>
-                        <div className="md:text-[17px] text-[15px] text-[#bef3da]">
+                        <div className="md:text-[17px] text-[15px] text-[#bef3da] truncate w-full">
                             {item.category}
                             </div>
                             <div className="md:text-[17px] text-[15px] text-[#bef3da]">
@@ -99,7 +100,7 @@ export default function List() {
 
                      
                     </div>
-                    <div className="w-[10%] h-[100%] bg-transparent flex 
+                    <div className="w-[10%] shrink-0 h-[100%] bg-transparent flex 
                     items-center justify-center"> <span className="w-[35px] h-[30%] flex items-center justify-center rounded-md
                      md:hover:bg-red-300 md:hover:text-black cursor-pointer"
                      onClick={() =>removeProduct(item._id)}>🗑️ </span> </div>

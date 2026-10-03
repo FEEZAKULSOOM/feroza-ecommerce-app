@@ -161,7 +161,7 @@ const handleGoogleLogin = async () => {
                 className="text-[#5555f6cf] cursor-pointer font-semibold hover:underline"
                 onClick={() => navigate('/registration')}
               >
-                Create New Account
+                Register
               </span>
             </p>
 
