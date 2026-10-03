@@ -73,46 +73,44 @@ const fetchCount = async () => {
  }, [])
 
   return (
-    <div className="w-[100vw] h-[100vh] bg-gradient-to-l from-[#141414]
-     to-[#0c2025] text-[white] relative">
+    <div className="w-[100vw] min-h-[100vh] bg-gradient-to-l from-[#141414]
+     to-[#0c2025] text-[white] relative overflow-x-hidden">
 
-    
-       <Nav/>
+  <Nav/>
 
- 
+  <SideBar/>
+  
+  <div className="w-[calc(100vw-80px)] sm:w-[70vw] min-h-[100vh] absolute left-[75px] sm:left-[22%] md:left-[25%] flex items-start justify-start flex-col 
+  gap-[25px] sm:gap-[40px] pt-[75px] sm:pt-[100px] pb-[40px] px-2 sm:px-0">
 
-         <SideBar/>
-      <div className="w-[70vw] h-[100vh] absolute left-[25%] flex items-Start justify-start flex-col 
-      gap-[40px] py-[100px]">
+    <h1 className="text-[24px] sm:text-[35px] text-[#afe2f2] font-medium">
+      OneCart Admin Panel
+    </h1>
 
-        <h1 className="text-[35px] text-[#afe2f2]">
-          OneCart Admin Panel
-        </h1>
+    <div className="flex items-center justify-start gap-[20px] sm:gap-[50px] flex-col md:flex-row w-full">
 
-        <div className="flex items-center justify-start gap-[50px] flex-col md:flex-row">
+      <div className="text-[#dcfafd] w-full sm:w-[400px] max-w-[95%] sm:max-w-[90%] h-[150px] sm:h-[200px] bg-[#0000002e] 
+      flex items-center justify-center flex-col gap-[12px] sm:gap-[20px] rounded-lg shadow-sm shadow-black backdrop-blur-lg md:text-[25px] text-[17px] sm:text-[20px] border-[1px] border-[#969595]">
+        Total No. of Products :
 
-          <div className="text-[#dcfafd] w-[400px] max-w-[90%] h-[200px] bg-[#0000002e] 
-          flex items-center justify-center flex-col gap-[20px] rounded-lg shadow-sm shadow-black backdrop-blur-lg md:text-[25px] text-[20px] border-[1px] border-[#969595]">
-            Total No. of Products :
+        <span className="px-[16px] sm:px-[20px] py-[6px] sm:py-[10px] bg-[#030e11] rounded-lg flex items-center
+         justify-center border-[1px] border-[#969595] text-[16px] sm:text-[22px]">
+          {totalProducts}
+        </span>
+      </div>
 
-            <span className="px-[20px] py-[10px] bg-[#030e11] rounded-lg flex items-center
-             justify-center border-[1px] border-[#969595]">
-              {totalProducts}
-            </span>
-          </div>
+      <div className="text-[#dcfafd] w-full sm:w-[400px] max-w-[95%] sm:max-w-[90%] h-[150px] sm:h-[200px] bg-[#0000002e] flex items-center justify-center flex-col gap-[12px] sm:gap-[20px] rounded-lg shadow-sm shadow-black backdrop-blur-lg md:text-[25px] text-[17px] sm:text-[20px] border-[1px] border-[#969595]">
+        Total No. of Orders :
 
-          <div className="text-[#dcfafd] w-[400px] max-w-[90%] h-[200px] bg-[#0000002e] flex items-center justify-center flex-col gap-[20px] rounded-lg shadow-sm shadow-black backdrop:blur-lg md:text-[25px] text-[20px] border-[1px] border-[#969595]">
-            Total No. of Orderss :
-
-            <span className="px-[20px] py-[10px] bg-[#030e11] rounded-lg flex items-center justify-center border-[1px] border-[#969595]">
-              {totalOrders}
-            </span>
-          </div>
-
-        </div>
-
+        <span className="px-[16px] sm:px-[20px] py-[6px] sm:py-[10px] bg-[#030e11] rounded-lg flex items-center justify-center border-[1px] border-[#969595] text-[16px] sm:text-[22px]">
+          {totalOrders}
+        </span>
       </div>
 
     </div>
+
+  </div>
+
+</div>
   )
 }

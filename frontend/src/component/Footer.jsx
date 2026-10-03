@@ -5,18 +5,18 @@ function Footer() {
   return (
     <footer className="w-full bg-[#aff4d2ec] text-[#1e2223] mb-[77px] md:mb-0">
       
-      {/* Main Content Area */}
-      <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 md:px-16 py-8 md:py-12 flex flex-col md:flex-row items-start justify-between gap-8 md:gap-12">
+      {/* Main Content Area: Kept as row across all screen sizes with responsive padding */}
+      <div className="w-full max-w-7xl mx-auto px-3 sm:px-10 md:px-16 py-5 md:py-12 flex flex-row items-start justify-between gap-2 sm:gap-6 md:gap-12">
         
         {/* Column 1: Brand Info */}
-        <div className="w-full md:w-[35%] flex flex-col items-start gap-3">
-          <div className="flex items-center gap-2">
+        <div className="w-[36%] md:w-[35%] flex flex-col items-start gap-1.5 md:gap-3">
+          <div className="flex items-center gap-1.5 md:gap-2">
             <img
               alt="Feroza Logo"
-              className="w-[28px] h-[28px] md:w-[36px] md:h-[36px]"
+              className="w-[20px] h-[20px] sm:w-[28px] sm:h-[28px] md:w-[36px] md:h-[36px] shrink-0"
               src={feroza}
             />
-            <span className="text-[20px] md:text-[22px] font-bold text-black tracking-wide">
+            <span className="text-[14px] sm:text-[20px] md:text-[22px] font-bold text-black tracking-wide">
               Feroza
             </span>
           </div>
@@ -25,17 +25,17 @@ function Footer() {
             Feroza is your all-in-one online shopping destination, offering quality products, unbeatable deals, and fast delivery—all backed by trusted service designed to make your life easier.
           </p>
 
-          <p className="text-[13px] text-[#1e2223] block md:hidden">
+          <p className="text-[10px] sm:text-[13px] text-[#1e2223] block md:hidden leading-tight">
             Fast. Easy. Feroza Shopping
           </p>
         </div>
 
         {/* Column 2: Quick Links */}
-        <div className="w-full md:w-[25%] flex flex-col items-start md:items-center text-left md:text-center gap-2">
-          <p className="text-[16px] md:text-[18px] font-bold uppercase tracking-wider text-black">
+        <div className="w-[28%] md:w-[25%] flex flex-col items-center md:items-center text-center gap-1 md:gap-2">
+          <p className="text-[11px] sm:text-[16px] md:text-[18px] font-bold uppercase tracking-wider text-black">
             COMPANY
           </p>
-          <ul className="flex flex-col gap-1.5 text-[13px] md:text-[15px]">
+          <ul className="flex flex-col gap-1 md:gap-1.5 text-[10px] sm:text-[13px] md:text-[15px]">
             <li className="cursor-pointer hover:underline hidden md:block">Home</li>
             <li className="cursor-pointer hover:underline">About us</li>
             <li className="cursor-pointer hover:underline hidden md:block">Delivery</li>
@@ -44,13 +44,13 @@ function Footer() {
         </div>
 
         {/* Column 3: Contact */}
-        <div className="w-full md:w-[30%] flex flex-col items-start md:items-center text-left md:text-center gap-2">
-          <p className="text-[16px] md:text-[18px] font-bold uppercase tracking-wider text-black">
+        <div className="w-[34%] md:w-[30%] flex flex-col items-end md:items-center text-right md:text-center gap-1 md:gap-2">
+          <p className="text-[11px] sm:text-[16px] md:text-[18px] font-bold uppercase tracking-wider text-black">
             GET IN TOUCH
           </p>
-          <ul className="flex flex-col gap-1.5 text-[13px] md:text-[15px]">
-            <li>+92-319085856</li>
-            <li>contact@feroza.com</li>
+          <ul className="flex flex-col gap-1 md:gap-1.5 text-[10px] sm:text-[13px] md:text-[15px]">
+            <li className="truncate max-w-full">+92-319085856</li>
+            <li className="truncate max-w-full">contact@feroza.com</li>
             <li className="hidden md:block">+92-3402077761</li>
             <li className="hidden md:block">admin@feroza.com</li>
           </ul>
@@ -62,7 +62,7 @@ function Footer() {
       <div className="w-full h-[1px] bg-slate-400/40"></div>
 
       {/* Copyright Bar */}
-      <div className="w-full py-4 text-center text-[12px] md:text-[14px] text-[#1e2223]">
+      <div className="w-full py-2.5 md:py-4 text-center text-[10px] sm:text-[12px] md:text-[14px] text-[#1e2223]">
         Copyright 2026@feroza.com - All Rights Reserved
       </div>
 
