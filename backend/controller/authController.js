@@ -16,6 +16,15 @@ export const registration = async (req, res) => {
       return res.status(400).json({ message: "Name is required" });
     }
 
+    const trimmedName = name.trim();
+    const nameRegex = /^[a-zA-Z\s'-]{2,50}$/;
+
+    if (!nameRegex.test(trimmedName)) {
+      return res.status(400).json({
+        message: "Invalid name: Names must be 2-50 characters long and contain only letters (no numbers or symbols)",
+      });
+    }
+
     if (!email || !validator.isEmail(email)) {
       return res.status(400).json({ message: "Invalid email format" });
     }
@@ -31,12 +40,13 @@ export const registration = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const user = await User.create({
-      name,
+
+
+     const user = await User.create({
+      name: trimmedName,
       email: email.toLowerCase(),
       password: hashedPassword,
     });
-
     const token = await generateToken(user);
 
     res.cookie("token", token, {

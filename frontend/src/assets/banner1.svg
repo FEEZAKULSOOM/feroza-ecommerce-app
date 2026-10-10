@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="100%" height="100%">
+  <defs>
+    <clipPath id="b1-left"><rect x="550" y="10" width="310" height="500" rx="4" /></clipPath>
+    <clipPath id="b1-tr"><rect x="870" y="10" width="320" height="245" rx="4" /></clipPath>
+    <clipPath id="b1-br"><rect x="870" y="265" width="320" height="245" rx="4" /></clipPath>
+  </defs>
+
+  <!-- Left Side: Dark Blue (#1a2b2f) -->
+  <rect x="0" y="0" width="540" height="520" fill="#1a2b2f" />
+  
+  <!-- Left Side Text & Button -->
+  <text x="60" y="180" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="600" fill="#00d2ff" letter-spacing="2">NEW ARRIVALS</text>
+  <text x="60" y="240" font-family="'Segoe UI', sans-serif" font-size="44" font-weight="700" fill="#ffffff">BEIGE TRACKSUITS</text>
+  <text x="60" y="280" font-family="'Segoe UI', sans-serif" font-size="18" font-weight="300" fill="#d0dcd0">Minimalist Hoodies &amp; Urban Essentials</text>
+  <rect x="60" y="320" width="160" height="48" rx="24" fill="#ffffff" />
+  <text x="98" y="350" font-family="'Segoe UI', sans-serif" font-size="15" font-weight="700" fill="#1a2b2f">SHOP NOW</text>
+
+  <!-- Right Side: 3 Matching Outfit Images -->
+  <image href="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&amp;w=800" x="550" y="10" width="310" height="500" preserveAspectRatio="xMidYMid slice" clip-path="url(#b1-left)" />
+  <image href="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&amp;w=800" x="870" y="10" width="320" height="245" preserveAspectRatio="xMidYMid slice" clip-path="url(#b1-tr)" />
+  <image href="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&amp;w=800" x="870" y="265" width="320" height="245" preserveAspectRatio="xMidYMid slice" clip-path="url(#b1-br)" />
+</svg>

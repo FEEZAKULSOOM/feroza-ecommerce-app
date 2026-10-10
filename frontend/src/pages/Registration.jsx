@@ -23,8 +23,16 @@ function Registration() {
   const [googleLoading, setGoogleLoading] = useState(false);
   let { getCurrentUser } = useContext(userDataContext);
 
-  const handleSignUp = async (e) => {
+const handleSignUp = async (e) => {
     e.preventDefault();
+
+    const trimmedName = name.trim();
+    const nameRegex = /^[a-zA-Z\s'-]{2,50}$/;
+
+    if (!nameRegex.test(trimmedName)) {
+      toast.error("Name must be at least 2 characters and contain only letters (no numbers or symbols)");
+      return;
+    }
    
     try {
       setLoading(true);
@@ -129,12 +137,14 @@ function Registration() {
           {/* Inputs */}
           <div className="w-full flex flex-col items-center justify-center gap-4">
             
-            {/* Username */}
+{/* Username */}
             <input
               type="text"
-              placeholder="UserName"
+              placeholder="Full Name (Letters only)"
               onChange={(e) => setName(e.target.value)}
               value={name}
+              pattern="^[a-zA-Z\s'-]{2,50}$"
+              title="Name must be between 2 and 50 characters and contain only letters"
               className="w-full h-[50px] bg-transparent border-2 border-[#96969635] rounded-lg placeholder-[#ffffffc7] px-5 font-semibold outline-none focus:border-[#6060f5]"
               required
             />
