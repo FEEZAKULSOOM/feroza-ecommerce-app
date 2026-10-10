@@ -30,7 +30,7 @@ const handleSignUp = async (e) => {
     const nameRegex = /^[a-zA-Z\s'-]{2,50}$/;
 
     if (!nameRegex.test(trimmedName)) {
-      toast.error("Name must be at least 2 chars and contain only letters");
+      toast.error("Name can contain only letters");
       return;
     }
    
