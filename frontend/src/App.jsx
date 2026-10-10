@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-
 import Registration from './pages/Registration'
 import Login from './pages/Login'
 import Home from './pages/Home'
@@ -15,130 +14,86 @@ import { Route, Routes, Navigate } from 'react-router-dom'
 import Cart from './pages/Cart.jsx'
 import Order from './pages/Order.jsx'
 import OrderConfirmation from './pages/OrderConfirmation.jsx'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import NotFound from './pages/NotFound.jsx'
 import Ai from './pages/Ai.jsx'
 
 function App() {
-
     let { userData } = useContext(userDataContext)
 
     return (
         <>
             <ToastContainer />
-            {userData && <Nav />}
+            
+            {/* Always show the Nav bar on all pages */}
+            <Nav />
 
             <Routes>
+                {/* 1. Public Store Pages: Accessible by everyone */}
+                <Route path="/" element={<Home />} />
+                <Route path="/collections" element={<Collections />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/product" element={<Product />} />
+                <Route path="/productdetail/:productId" element={<ProductDetail />} />
 
+                {/* 2. Authentication Pages */}
                 <Route
                     path="/login"
                     element={
                         userData
-                            ? <Home />
+                            ? <Navigate to="/" replace />
                             : <Login />
                     }
                 />
-
-<Route
-    path="/registration"
-    element={
-        userData
-            ? <Navigate to="/" replace />
-            : <Registration />
-    }
-/>
-
                 <Route
-                    path="/order-confirmation"
-                    element={<OrderConfirmation />}
-                />
-
-                <Route
-                    path="/"
+                    path="/registration"
                     element={
                         userData
-                            ? <Home />
-                            : <Login />
+                            ? <Navigate to="/" replace />
+                            : <Registration />
                     }
                 />
 
-                <Route
-                    path="/about"
-                    element={
-                        userData
-                            ? <About />
-                            : <Navigate to="/login" />
-                    }
-                />
-
-                <Route
-                    path="/collections"
-                    element={
-                        userData
-                            ? <Collections />
-                            : <Navigate to="/login" />
-                    }
-                />
-
-                <Route
-                    path="/productdetail/:productId"
-                    element={
-                        userData
-                            ? <ProductDetail />
-                            : <Navigate to="/login" />
-                    }
-                />
-
+                {/* 3. Protected Actions: Require Login */}
                 <Route
                     path="/cart"
                     element={
                         userData
-                            ? <Cart/>
-                            : <Navigate to="/login" />
+                            ? <Cart />
+                            : <Navigate to="/login" replace />
                     }
                 />
-
-                <Route
-                    path="/contact"
-                    element={
-                        userData
-                            ? <Contact />
-                            : <Navigate to="/login" />
-                    }
-                />
-
                 <Route
                     path="/placeorder"
                     element={
                         userData
                             ? <PlaceOrder />
-                            : <Navigate to="/login" />
+                            : <Navigate to="/login" replace />
                     }
                 />
-
                 <Route
                     path="/order"
                     element={
                         userData
                             ? <Order />
-                            : <Navigate to="/login" />
+                            : <Navigate to="/login" replace />
                     }
                 />
-
                 <Route
-                    path="/product"
+                    path="/order-confirmation"
                     element={
                         userData
-                            ? <Product />
-                            : <Navigate to="/login" />
+                            ? <OrderConfirmation />
+                            : <Navigate to="/login" replace />
                     }
                 />
 
-                {/* Catch-all 404 Route placed at the very end */}
+                {/* Catch-all 404 Route */}
                 <Route path="*" element={<NotFound />} />
-
             </Routes>
-            <Ai/>
+            
+            <Ai />
         </>
     )
 }

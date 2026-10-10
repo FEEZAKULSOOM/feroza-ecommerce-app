@@ -81,34 +81,46 @@ import axios from 'axios';
 
 
 
-        <div className='w-[30%] flex items-center justify-end gap-[20px]'>
-            {!showSearch &&<IoSearchCircleOutline className='w-[38px] h-[38px] text-[#000000] cursor-pointer'
-            onClick={() => {setShowSearch(prev => !prev); navigate('/collections')}}/> } 
-             {showSearch && 
+<div className='w-[30%] flex items-center justify-end gap-[20px]'>
+            {!showSearch ? (
+              <IoSearchCircleOutline
+                className='w-[38px] h-[38px] text-[#000000] cursor-pointer'
+                onClick={() => { setShowSearch(prev => !prev); navigate('/collections'); }}
+              />
+            ) : (
               <IoSearchCircleSharp
- className='w-[38px] h-[38px] text-[#000000] cursor-pointer'
-            onClick={() => setShowSearch(prev => !prev)}
-            />}
-            
-{!userData ? (
-  <FaCircleUser className='w-[29px] h-[29px] text-[#000000] cursor-pointer'
-  onClick={() => setShowProfile(prev => !prev)}
-    />
-) : (
-  <div className='w-[30px] h-[30px] bg-[#080808] text-[white] rounded-full 
-  flex items-center justify-center cursor-pointer' onClick= {()=>setShowProfile(prev => !prev)}>
-    {userData?.name ? userData.name.slice(0, 1).toUpperCase() : 'U'}
-  </div>
-)}
-            
-            <MdOutlineShoppingCart className='w-[30px] h-[30px] text-[#000000] cursor-pointer
-            hidden md:block'  onClick = {()=> navigate('/cart')}/>
-            <p className="absolute w-[18px] h-[18px] items-center md:flex justify-center
-             bg-black px-[5px] py-[2px] text-white rounded-full text-[9px]
-             top-[10px] right-[23px] hidden ">{getCardCount()}</p>
+                className='w-[38px] h-[38px] text-[#000000] cursor-pointer'
+                onClick={() => setShowSearch(prev => !prev)}
+              />
+            )}
 
+            {/* If logged in: Show Avatar Initial & Cart */}
+            {userData ? (
+              <>
+                <div
+                  className='w-[32px] h-[32px] bg-[#080808] text-[white] rounded-full 
+                  flex items-center justify-center cursor-pointer font-bold text-sm'
+                  onClick={() => setShowProfile(prev => !prev)}
+                >
+                  {userData?.name ? userData.name.slice(0, 1).toUpperCase() : 'U'}
+                </div>
 
-
+                <div className="relative cursor-pointer hidden md:block" onClick={() => navigate('/cart')}>
+                  <MdOutlineShoppingCart className='w-[30px] h-[30px] text-[#000000]' />
+                  <span className="absolute -top-1.5 -right-2 w-[18px] h-[18px] flex items-center justify-center bg-black text-white rounded-full text-[9px] font-bold">
+                    {getCardCount()}
+                  </span>
+                </div>
+              </>
+            ) : (
+              /* If guest: Show direct Login button */
+              <button
+                onClick={() => navigate('/login')}
+                className='bg-[#080808] text-white text-xs font-semibold px-4 py-2 rounded-xl hover:bg-slate-700 transition'
+              >
+                Login
+              </button>
+            )}
         </div>
          
          {
