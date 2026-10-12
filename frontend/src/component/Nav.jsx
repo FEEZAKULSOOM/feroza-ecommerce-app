@@ -53,14 +53,14 @@ import axios from 'axios';
      return (
        <div className="w-[100vw]  h-[70px] bg-[#ecfafaec] z-10 fixed
        top-0 flex items-center justify-between px-[30px] shadow-md shadow-black ">
-        <div className="w-[20%] lg:w-[30%] flex items-center justify-start gap-[10px]" >
+        <div className="flex items-center justify-start gap-[10px] shrink-0" >
             <img src={feroza} alt="" className='w-[30px]'/>
             <h1 className='text-[25px] text-[black] font-sans'>Feroza</h1>
 
 
         </div>
 
-        <div className="w-[50%] lg:w-[40%] hidden md:flex" >
+        <div className="hidden lg:flex" >
             <ul className='flex items-center justify-center gap-[19px] text-[white]'>
                 <li className='text-[15px] hover:bg-slate-500 cursor-pointer 
                 bg-[#000000c9] py-[10px] px-[20px] rounded-2xl'
@@ -80,48 +80,47 @@ import axios from 'axios';
         </div>
 
 
+<div className='flex items-center justify-end gap-3 sm:gap-5 flex-shrink-0'>
+  {!showSearch ? (
+    <IoSearchCircleOutline
+      className='w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] shrink-0 text-[#000000] cursor-pointer'
+      onClick={() => { setShowSearch(prev => !prev); navigate('/collections'); }}
+    />
+  ) : (
+    <IoSearchCircleSharp
+      className='w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] shrink-0 text-[#000000] cursor-pointer'
+      onClick={() => setShowSearch(prev => !prev)}
+    />
+  )}
 
-<div className='w-[30%] flex items-center justify-end gap-[20px]'>
-            {!showSearch ? (
-              <IoSearchCircleOutline
-                className='w-[38px] h-[38px] text-[#000000] cursor-pointer'
-                onClick={() => { setShowSearch(prev => !prev); navigate('/collections'); }}
-              />
-            ) : (
-              <IoSearchCircleSharp
-                className='w-[38px] h-[38px] text-[#000000] cursor-pointer'
-                onClick={() => setShowSearch(prev => !prev)}
-              />
-            )}
+  {/* If logged in: Show Avatar Initial & Cart */}
+  {userData ? (
+    <>
+      <div
+        className='w-[32px] h-[32px] shrink-0 bg-[#080808] text-white rounded-full 
+        flex items-center justify-center cursor-pointer font-bold text-sm'
+        onClick={() => setShowProfile(prev => !prev)}
+      >
+        {userData?.name ? userData.name.slice(0, 1).toUpperCase() : 'U'}
+      </div>
 
-            {/* If logged in: Show Avatar Initial & Cart */}
-            {userData ? (
-              <>
-                <div
-                  className='w-[32px] h-[32px] bg-[#080808] text-[white] rounded-full 
-                  flex items-center justify-center cursor-pointer font-bold text-sm'
-                  onClick={() => setShowProfile(prev => !prev)}
-                >
-                  {userData?.name ? userData.name.slice(0, 1).toUpperCase() : 'U'}
-                </div>
-
-                <div className="relative cursor-pointer hidden md:block" onClick={() => navigate('/cart')}>
-                  <MdOutlineShoppingCart className='w-[30px] h-[30px] text-[#000000]' />
-                  <span className="absolute -top-1.5 -right-2 w-[18px] h-[18px] flex items-center justify-center bg-black text-white rounded-full text-[9px] font-bold">
-                    {getCardCount()}
-                  </span>
-                </div>
-              </>
-            ) : (
-              /* If guest: Show direct Login button */
-              <button
-                onClick={() => navigate('/login')}
-                className='bg-[#080808] text-white text-xs font-semibold px-4 py-2 rounded-xl hover:bg-slate-700 transition'
-              >
-                Login
-              </button>
-            )}
-        </div>
+      <div className="relative cursor-pointer hidden md:block shrink-0" onClick={() => navigate('/cart')}>
+        <MdOutlineShoppingCart className='w-[28px] h-[28px] text-[#000000]' />
+        <span className="absolute -top-1.5 -right-2 w-[18px] h-[18px] flex items-center justify-center bg-black text-white rounded-full text-[9px] font-bold">
+          {getCardCount()}
+        </span>
+      </div>
+    </>
+  ) : (
+    /* If guest: Show direct Login button */
+<button
+  onClick={() => navigate('/login')}
+  className='bg-[#080808] text-white text-xs md:text-sm font-semibold px-3 py-1.5 md:px-5 md:py-2.5 rounded-lg md:rounded-xl hover:bg-slate-700 transition shrink-0'
+>
+  Login
+</button>
+  )}
+</div>
          
          {
             showSearch  &&
@@ -167,40 +166,41 @@ import axios from 'axios';
                 cursor-pointer"
                 onClick={() =>{ navigate('/about')
                   setShowProfile(false)
-                }}>About</li>
+                }
+                }>About</li>
              </ul>
            </div>
             }
 
 
             <div className="w-[100vw] h-[90px] flex items-center justify-between
-            px-[20px] fixed bottom-0 left-0 bg-[#191818] md:hidden
+            px-[20px] fixed bottom-0 left-0 bg-[#191818] lg:hidden
             text-[16px]">
 
                  <button className="text-[white] flex items-center justify-center
                  gap-[2px] flex-col">
-                     <IoHome className='w-[30px] h-[30px] text-[#ffffff] md:hidden
+                     <IoHome className='w-[24px] h-[24px] text-[#ffffff] lg:hidden
                      cursor-pointer'
                      onClick={() => navigate('/')}/>
 
                     Home</button>
                  <button className="text-[white] flex items-center justify-center
                  gap-[2px] flex-col">
-                     <VscCollectionSmall className='w-[30px] h-[30px] text-[#ffffff] md:hidden
+                     <VscCollectionSmall className='w-[24px] h-[24px] text-[#ffffff] lg:hidden
                      cursor-pointer'
                      onClick={() => navigate('/collections')}/>
 
                    Collections</button>
                  <button className="text-[white] flex items-center justify-center
                  gap-[2px] flex-col">
-                     <MdConnectWithoutContact className='w-[30px] h-[30px] text-[#ffffff] md:hidden
+                     <MdConnectWithoutContact className='w-[24px] h-[24px] text-[#ffffff] lg:hidden
                      cursor-pointer'
                      onClick={() => navigate('/contact')}/>
 
                     Contact</button>
                  <button className="text-[white] flex items-center justify-center
                  gap-[2px] flex-col">
-                     <MdOutlineShoppingCart className='w-[30px] h-[30px] text-[#ffffff] md:hidden
+                     <MdOutlineShoppingCart className='w-[24px] h-[24px] text-[#ffffff] lg:hidden
                      cursor-pointer' onClick = {()=> navigate('/cart')}/>
 
                     Cart</button>

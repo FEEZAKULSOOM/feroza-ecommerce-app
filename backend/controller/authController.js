@@ -2,10 +2,8 @@ import User from "../model/userModel.js";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import { generateToken , generateToken1 } from "../config/token.js";
-import validator from "validator";
-import bcrypt from "bcrypt";
-import User from "../models/userModel.js"; // Adjust your import path
-import { generateToken } from "../utils/generateToken.js"; // Adjust your import path
+
+
 
 // 1. Regular Form Registration (Email + Password)
 export const registration = async (req, res) => {
